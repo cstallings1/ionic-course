@@ -5,7 +5,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 Controller for the discover page
 */
 .controller('DiscoverCtrl', function($scope, $timeout, User, Recommendations) {
-  Recommendations.getNextSongs()
+  Recommendations.init()
     .then(function(){
       $scope.currentSong = Recommendations.queue[0];
       Recommendations.playCurrentSong();
@@ -48,6 +48,12 @@ Controller for the favorites page
 /*
 Controller for our tab bar
 */
-.controller('TabsCtrl', function($scope) {
+.controller('TabsCtrl', function($scope, Recommendations) {
+  $scope.enteringFavorites = function() {
+    Recommendations.haltAudio();
+  }
 
+  $scope.leavingFavorites = function() {
+    Recommendations.init();
+  }
 });

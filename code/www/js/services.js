@@ -61,5 +61,13 @@ angular.module('songhop.services', [])
       if (media) media.pause();
     }
 
+    o.init = function() {
+      if (o.queue.length === 0) {
+        return o.getNextSongs();
+      } else {
+        return o.playCurrentSong();
+      }
+    }
+
     return o;
 });
